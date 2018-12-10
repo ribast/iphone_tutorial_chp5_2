@@ -9,12 +9,30 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var textField: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // UseDefaultの設定
+        let userDefaults = UserDefaults.standard
+        
+        // 値の抽出
+        if let value = userDefaults.string(forKey: "text") {
+            textField.text = value
+        }
+        
     }
 
-
+    @IBAction func tapActionButton(_ sender: Any) {
+        let userDefaults = UserDefaults.standard
+        // 値の設定
+        userDefaults.set(textField.text, forKey: "text")
+        
+        // 保存処理
+        userDefaults.synchronize()
+    }
+    
 }
 
